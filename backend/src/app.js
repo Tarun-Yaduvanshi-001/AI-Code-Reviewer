@@ -5,7 +5,7 @@ const cors = require('cors')
 const app = express()
 
 app.use(cors({
-  origin: process.env.VERCEL_BASE_URL,
+  origin: process.env.NETLIFY_BASE_URL,
   credentials: true
 }));
 
