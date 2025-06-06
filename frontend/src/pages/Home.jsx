@@ -5,7 +5,6 @@ import Markdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
 import Loader from "../components/Loader";
-import process from 'dotenv'
 
 function Home() {
   const [code, setCode] = useState("");
@@ -19,7 +18,8 @@ function Home() {
   const handleEnhanceCode = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(process.env.ENHANCE_CODE_URL, {
+      const baseURL = import.meta.env.VITE_API_BASE_URL;
+      const response = await axios.post(`${baseURL}/ai/get-review`, {
         code,
       });
       setReview(response.data);
@@ -33,8 +33,9 @@ function Home() {
   const handleExplainCode = async () => {
     setLoading(true);
     try {
+      const baseURL = import.meta.env.VITE_API_BASE_URL;
       const response = await axios.post(
-        process.env.EXPLAIN_CODE_URL,
+        `${baseURL}/ai/explain-code`,
         { code }
       );
       setReview(response.data);
