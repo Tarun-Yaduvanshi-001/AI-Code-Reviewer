@@ -13,7 +13,7 @@ function Navbar() {
           alt="Logo"
           className="h-6 w-6 sm:h-12 sm:w-12"
         />
-        <h1 className="text-xl sm:text-3xl font-bold ms-2 ">Code Reviewer</h1>
+        <h1 className="text-lg sm:text-3xl font-bold sm:ms-2 ms-1">Code Reviewer</h1>
       </div>
 
 
