@@ -24,7 +24,7 @@ function Home() {
       });
       setReview(response.data);
     } catch (error) {
-      setReview("❌ Something went wrong while enhancing the code.", error);
+      setReview("❌ Something went wrong while enhancing the code.", error.message);
     } finally {
       setLoading(false);
     }
@@ -40,7 +40,7 @@ function Home() {
       );
       setReview(response.data);
     } catch (error) {
-      setReview("❌ Something went wrong while explaining the code.", error);
+      setReview("❌ Something went wrong while explaining the code.", error.message);
     } finally {
       setLoading(false);
     }
