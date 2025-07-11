@@ -1,15 +1,13 @@
-const aiService = require("../services/ai.service")
-
+const aiService = require("../services/ai.service");
 
 module.exports.getReview = async (req, res) => {
+  const code = req.body.code;
 
-    const code = req.body.code;
+  if (!code) {
+    return res.status(400).send("Prompt is required");
+  }
 
-    if (!code) {
-        return res.status(400).send("Prompt is required");
-    }
-
-    const prompt =  `
+  const prompt = `
                 AI System Instruction: Senior Code Reviewer (7+ Years of Experience)
 
                 Role & Responsibilities:
@@ -85,22 +83,20 @@ module.exports.getReview = async (req, res) => {
                 Now, the original code to review is - 
 
                 ${code}
-         `
-    const response = await aiService(prompt);
+         `;
+  const response = await aiService(prompt);
 
-
-    res.send(response);
-}
-
+  res.send(response);
+};
 
 module.exports.explainCode = async (req, res) => {
-    const code = req.body.code;
+  const code = req.body.code;
 
-    if (!code) {
-        return res.status(400).send("Code is required");
-    }
+  if (!code) {
+    return res.status(400).send("Code is required");
+  }
 
-    const prompt = `
+  const prompt = `
 AI System Instruction: Expert Code Explainer (7+ Years of Teaching & Development Experience)
 
 Role & Responsibilities:
@@ -116,11 +112,32 @@ Your explanation should help learners:
 
 Don't add any prefix line in the explanation other than the format. only follow the stucture. you can add a line in the begining to tell the programming language of the given code.
 
-Explanation Structure:
+
+Explanation Structure (use exact spacing below):
+
 1. 📋 **Overview** - Describe what the entire code is doing at a high level.
+
+[Write overview here]
+<blank line>
+
 2. 🔍 **Block-by-Block Explanation** - Explain how each part works and flows.
+
+[Write overview here]
+<blank line>
+
 3. 💡 **Concepts Used** - List and explain key programming concepts or patterns in the code.
+
+[Write overview here]
+<blank line>
+
 4. ⚠️ **Common Pitfalls** - Warn about anything that could confuse beginners or lead to mistakes.
+
+[Write overview here]
+
+Respond in this exact format, with clear line breaks between sections.
+DO NOT skip the blank lines. They are required between each section.
+
+
 
 Tone & Guidelines:
     • Be clear, precise, and beginner-friendly.
@@ -138,7 +155,6 @@ ${code}
 \`\`\`
 `;
 
-
-    const response = await aiService(prompt);
-    res.send(response);
+  const response = await aiService(prompt);
+  res.send(response);
 };
